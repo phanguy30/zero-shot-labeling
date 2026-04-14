@@ -65,7 +65,7 @@ The original dataset does not exhaustively label all cherry instances. As a resu
       <sub>Ground Truth<sub>
     </td>
     <td width="50%" align="center">
-      <img src="compare/manual_collage.jpg" width="90%"><br>
+      <img src="compare/base_dino_collage.jpg" width="90%"><br>
       <sub>Base Grounding Dino</sub>
     </td>
   </tr>
@@ -76,11 +76,11 @@ The original dataset does not exhaustively label all cherry instances. As a resu
   <tr>
     <td width="50%" align="center">
       <img src="compare/auto_collage.jpg" width="90%"><br>
-      <sub>Auto Prediction</sub>
+      <sub>Auto Label Prediction</sub>
     </td>
     <td width="50%" align="center">
       <img src="compare/manual_collage.jpg" width="90%"><br>
-      <sub>Manual Prediction</sub>
+      <sub>Manual Label Prediction</sub>
     </td>
   </tr>
 </table>
