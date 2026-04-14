@@ -137,15 +137,14 @@ Options:
 
 ---
 
-### 6. Repeat (self-training loop)
-- Re-run YOLO → generate better labels → retrain
-- Each iteration:
-  - improves label quality
-  - improves model performance
+### 6. Repeat (Self-Training Loop)
+- Re-run YOLO to generate improved labels, then retrain the model
+- With each iteration:
+	•	Label quality improves
+	•	Model performance improves
 
-Stop when:
-- performance plateaus
-- label improvements become marginal
+To monitor progress, maintain a small manually labeled validation set.
+Stop the loop when performance plateaus or label quality no longer improves.
 
 ## Note
 
