@@ -6,7 +6,6 @@ dataset/
 
 # training outputs
 runs/
-yolo_train_out/
 Eval/ground_dino_out
 
 # large artifacts
