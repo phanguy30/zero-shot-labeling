@@ -16,6 +16,7 @@ Comparison between:
 - training with auto-generated labels (starting with only images no labels)
 - training with manually annotated labels
 
+
 ### Metrics (Validation)
 
 | Model         | mAP50 | mAP50-95 | Precision | Recall |
@@ -23,21 +24,64 @@ Comparison between:
 | Auto Label   | 0.801 | 0.547    | 0.752    | 0.753  |
 | Manual Label | 0.857 | 0.625    | 0.864    | 0.775  |
 
-### Auto Label
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-  <img src="yolo_train_out/yolo_pt_auto_label_bench_val/BoxPR_curve.png" width="100%">
-  <img src="yolo_train_out/yolo_pt_auto_label_bench_val/confusion_matrix_normalized.png" width="100%">
-  <img src="yolo_train_out/yolo_pt_auto_label_bench_val/val_batch2_pred.jpg" width="100%">
-</div>
 
-### Manual Label
+**Limitation** 
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-  <img src="yolo_train_out/yolo_pt_manual_label_bench_val/BoxPR_curve.png" width="100%">
-  <img src="yolo_train_out/yolo_pt_manual_label_bench_val/confusion_matrix_normalized.png" width="100%">
-  <img src="yolo_train_out/yolo_pt_manual_label_bench_val/val_batch2_pred.jpg" width="100%">
-</div>
+The original dataset does not exhaustively label all cherry instances. As a result, the auto-labeling model may correctly identify cherries that are missing from the ground truth but are counted as false positives during evaluation. This makes the model appear less precise than it actually is. In reality, the true precision of the auto-labeling approach is likely higher than reported.
+
+
+### Auto vs Manual Comparison
+
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_auto_label_bench_val/BoxPR_curve.png" width="100%"><br>
+      <sub>Auto PR Curve</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_auto_label_bench_val/confusion_matrix_normalized.png" width="100%"><br>
+      <sub>Auto Confusion Matrix</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_manual_label_bench_val/BoxPR_curve.png" width="100%"><br>
+      <sub>Manual PR Curve</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_manual_label_bench_val/confusion_matrix_normalized.png" width="100%"><br>
+      <sub>Manual Confusion Matrix</sub>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Row 2: Ground Truth -->
+<table width="100%" style="margin-top: 15px;">
+  <tr>
+    <td align="center">
+      <img src="yolo_train_out/yolo_pt_manual_label_bench_val/val_batch2_labels.jpg" width="80%"><br>
+      <div style="font-size: 16px; font-weight: 500; margin-top: 15px;">
+        Ground Truth
+      </div>
+    </td>
+  </tr>
+</table>
+
+<!-- Row 3: Predictions side by side -->
+<table width="100%" style="margin-top: 15px;">
+  <tr>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_auto_label_bench_val/val_batch2_pred.jpg" width="90%"><br>
+      <sub>Auto Prediction</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_manual_label_bench_val/val_batch2_pred.jpg" width="90%"><br>
+      <sub>Manual Prediction</sub>
+    </td>
+  </tr>
+</table>
 
 # Auto-Labeling Workflow (Bootstrapped Object Detection)
 
@@ -110,3 +154,11 @@ Stop when:
 
 - [ ] Add a Jupyter notebook demonstrating the full auto-labeling workflow end-to-end
 - [ ] Include example images and intermediate outputs (Grounding DINO → YOLO → merged labels
+
+## Credit
+
+This project uses the following models and data set:
+
+- Grounding DINO (IDEA Research)  : https://github.com/idea-research/groundingdino
+- YOLOv8 (Ultralytics)  : https://github.com/ultralytics/ultralytics
+- Dataset / Images (Roboflow): https://roboflow.com
