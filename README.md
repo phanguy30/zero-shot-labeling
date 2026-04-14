@@ -19,10 +19,11 @@ Comparison between:
 
 ### Metrics (Validation)
 
-| Model         | mAP50 | mAP50-95 | Precision | Recall |
-|--------------|------|----------|----------|--------|
-| Auto Label   | 0.801 | 0.547    | 0.752    | 0.753  |
-| Manual Label | 0.857 | 0.625    | 0.864    | 0.775  |
+| Model | mAP50 | mAP50-95 | Precision | Recall |
+|-------|------|----------|----------|--------|
+| Base Grounding DINO (box thr=0.35, text thr=0.25, prompt="small red fruit") | N/A | N/A | 0.69 | 0.71 |
+| Auto Label | 0.801 | 0.547 | 0.752 | 0.753 |
+| Manual Label | 0.857 | 0.625 | 0.864 | 0.775 |
 
 
 **Limitation** 
