@@ -69,6 +69,18 @@ The original dataset does not exhaustively label all cherry instances. As a resu
 </p>
 <p align="center"><sub>Auto Label Prediction vs Manual Label Prediction</sub></p>
 
+
+### Comments
+
+From purely visual inspection:
+- Ground truth appears incomplete; the auto-labeled model detects additional valid instances.
+- Grounding DINO is precise but misses many obvious objects (high precision, lower recall).
+- The auto-labeled model captures nearly all cherries, including background instances (higher recall, more noise).
+
+**To reduce over-detection:**
+- Use stricter thresholds during label refinement  
+- Increase confidence threshold at inference
+
 # Auto-Labeling Workflow (Bootstrapped Object Detection)
 
 ### 1. Initialize with a foundation model
