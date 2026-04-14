@@ -147,7 +147,12 @@ Stop the loop when performance plateaus or label quality no longer improves.
 
 ## Note
 
-This project uses a fully automated labeling pipeline via automatic merging, followed by a single round of label refinement and retraining.
+This project runs a single iteration of the self-training loop:
+
+1. Bootstrap initial labels (Grounding DINO)  
+2. Train YOLO on generated labels  
+3. Merge YOLO + Grounding DINO predictions (automatic refinement)  
+4. Retrain YOLO on the merged labels (final model)
 
 
 ## TODO
