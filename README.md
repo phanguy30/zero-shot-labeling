@@ -57,33 +57,17 @@ The original dataset does not exhaustively label all cherry instances. As a resu
 </table>
 
 
-<!-- Row 2: Ground Truth -->
-<table width="100%" style="margin-top: 15px;">
-  <tr>
-    <td width="50%" align="center">
-      <img src="yolo_train_out/yolo_pt_auto_label_bench_val/val_batch2_labels.jpg" width="90%"><br>
-      <sub>Ground Truth<sub>
-    </td>
-    <td width="50%" align="center">
-      <img src="compare/base_dino_collage.jpg" width="90%"><br>
-      <sub>Base Grounding Dino</sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="yolo_train_out/yolo_pt_auto_label_bench_val/val_batch2_labels.jpg" width="49%">
+  <img src="compare/base_dino_collage.jpg" width="49%">
+</p>
+<p align="center"><sub>Ground Truth vs Base Grounding DINO</sub></p>
 
-<!-- Row 3: Predictions side by side -->
-<table width="100%" style="margin-top: 15px;">
-  <tr>
-    <td width="50%" align="center">
-      <img src="compare/auto_collage.jpg" width="90%"><br>
-      <sub>Auto Label Prediction</sub>
-    </td>
-    <td width="50%" align="center">
-      <img src="compare/manual_collage.jpg" width="90%"><br>
-      <sub>Manual Label Prediction</sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="compare/auto_collage.jpg" width="49%">
+  <img src="compare/manual_collage.jpg" width="49%">
+</p>
+<p align="center"><sub>Auto Label Prediction vs Manual Label Prediction</sub></p>
 
 # Auto-Labeling Workflow (Bootstrapped Object Detection)
 
