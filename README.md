@@ -60,11 +60,13 @@ The original dataset does not exhaustively label all cherry instances. As a resu
 <!-- Row 2: Ground Truth -->
 <table width="100%" style="margin-top: 15px;">
   <tr>
-    <td align="center">
-      <img src="yolo_train_out/yolo_pt_manual_label_bench_val/val_batch2_labels.jpg" width="80%"><br>
-      <div style="font-size: 16px; font-weight: 500; margin-top: 15px;">
-        Ground Truth
-      </div>
+    <td width="50%" align="center">
+      <img src="yolo_train_out/yolo_pt_auto_label_bench_val/val_batch2_labels.jpg" width="90%"><br>
+      <sub>Ground Truth<sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="compare/manual_collage.jpg" width="90%"><br>
+      <sub>Base Grounding Dino</sub>
     </td>
   </tr>
 </table>
@@ -73,11 +75,11 @@ The original dataset does not exhaustively label all cherry instances. As a resu
 <table width="100%" style="margin-top: 15px;">
   <tr>
     <td width="50%" align="center">
-      <img src="yolo_train_out/yolo_pt_auto_label_bench_val/val_batch2_pred.jpg" width="90%"><br>
+      <img src="compare/auto_collage.jpg" width="90%"><br>
       <sub>Auto Prediction</sub>
     </td>
     <td width="50%" align="center">
-      <img src="yolo_train_out/yolo_pt_manual_label_bench_val/val_batch2_pred.jpg" width="90%"><br>
+      <img src="compare/manual_collage.jpg" width="90%"><br>
       <sub>Manual Prediction</sub>
     </td>
   </tr>
