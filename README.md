@@ -25,7 +25,6 @@ Comparison between:
 | Manual Label | 0.857 | 0.625    | 0.864    | 0.775  |
 
 
-
 **Limitation** 
 
 The original dataset does not exhaustively label all cherry instances. As a result, the auto-labeling model may correctly identify cherries that are missing from the ground truth but are counted as false positives during evaluation. This makes the model appear less precise than it actually is. In reality, the true precision of the auto-labeling approach is likely higher than reported.
@@ -128,7 +127,6 @@ Options:
 **2. Automatic merge (faster, usually sufficient)**
 - Combine boxes from both models
 - Remove duplicates using an IoU threshold
-
 ---
 
 ### 5. Retrain YOLO
@@ -148,6 +146,10 @@ Options:
 Stop when:
 - performance plateaus
 - label improvements become marginal
+
+## Note
+
+This project uses a fully automated labeling pipeline via automatic merging, followed by a single round of label refinement and retraining.
 
 
 ## TODO
