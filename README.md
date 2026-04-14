@@ -75,7 +75,7 @@ The original dataset does not exhaustively label all cherry instances. As a resu
 From purely visual inspection:
 - Ground truth appears incomplete; the auto-labeled model detects additional valid instances.
 - Grounding DINO is precise but misses many obvious objects (high precision, lower recall).
-- The auto-labeled model captures nearly all cherries, including background instances (higher recall, more noise).
+- The auto-labeled model captures nearly all cherries even the ones that are quite far away/ in the background (higher recall, more noise).
 
 **To reduce over-detection:**
 - Use stricter thresholds during label refinement  
