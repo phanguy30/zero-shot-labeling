@@ -9,9 +9,10 @@ import pandas as pd
 from torchvision.ops import box_convert
 
 # ---- paths to submodule ----
-LABELING_DIR = Path(__file__).resolve().parent.parent
-REPO_ROOT = LABELING_DIR.parent / "Grounded-SAM-2"
-sys.path.insert(0, str(REPO_ROOT))
+EVAL_DIR = Path(__file__).resolve().parent.parent
+
+REPO_ROOT = EVAL_DIR.parent 
+sys.path.insert(0, str(REPO_ROOT/"Grounded-SAM-2"))
 
 from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
@@ -21,25 +22,29 @@ from grounding_dino.groundingdino.util.inference import load_model, load_image, 
 # =========================
 # CONFIG
 # =========================
-TEXT_PROMPT = "gate."
+TEXT_PROMPT = "small red fruit."
+LABEL_MAPPING = {"small red fruit": 0}
 
-IMAGE_DIR = LABELING_DIR / "dataset" / "gate_dataset" / "images" / "train"
-LABEL_DIR = LABELING_DIR / "dataset" / "gate_dataset" / "labels" / "train"
-OUTPUT_DIR = LABELING_DIR / "outputs" / "batch_compare"
+IMAGE_DIR = REPO_ROOT / "dataset" / "cherry-detection-1" / "train" / "images"
+LABEL_DIR = REPO_ROOT / "dataset" / "cherry-detection-1" / "train" / "labels"
+OUTPUT_DIR = EVAL_DIR / "ground_dino_eval" / "dino_pred"
 
-SAM2_CHECKPOINT = REPO_ROOT / "checkpoints" / "sam2.1_hiera_large.pt"
+SAM2_CHECKPOINT = REPO_ROOT / "Grounded-SAM-2" / "checkpoints" / "sam2.1_hiera_large.pt"
 SAM2_MODEL_CONFIG = "configs/sam2.1/sam2.1_hiera_l.yaml"
-GROUNDING_DINO_CONFIG = REPO_ROOT / "grounding_dino" / "groundingdino" / "config" / "GroundingDINO_SwinT_OGC.py"
-GROUNDING_DINO_CHECKPOINT = REPO_ROOT / "gdino_checkpoints" / "groundingdino_swint_ogc.pth"
+GROUNDING_DINO_CONFIG = REPO_ROOT / "Grounded-SAM-2" / "grounding_dino" / "groundingdino" / "config" / "GroundingDINO_SwinT_OGC.py"
+GROUNDING_DINO_CHECKPOINT = REPO_ROOT / "Grounded-SAM-2" / "gdino_checkpoints" / "groundingdino_swint_ogc.pth"
 
 BOX_THRESHOLD = 0.35
 TEXT_THRESHOLD = 0.25
+CONFIDENCE_THRESHOLD = 0.0
 DEVICE = "mps" if torch.backends.mps.is_available() else "cpu"
 MULTIMASK_OUTPUT = False
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 (OUTPUT_DIR / "viz").mkdir(exist_ok=True)
+(OUTPUT_DIR/ "labels").mkdir(exist_ok=True)
 (OUTPUT_DIR / "pred_masks").mkdir(exist_ok=True)
+(OUTPUT_DIR / "viz_with_gt").mkdir(exist_ok=True)
 
 
 # =========================
@@ -345,7 +350,7 @@ def make_bbox_overlay(
         x1, y1, x2, y2 = map(int, box)
         cv2.rectangle(overlay, (x1, y1), (x2, y2), (0, 0, 255), 2)
 
-    return cv2.addWeighted(image_bgr, 0.7, overlay, 0.3, 0)
+    return overlay
 
 
 # =========================
@@ -374,3 +379,38 @@ def get_matched_stems(image_folder: Path, label_folder: Path):
         print(f"[WARN] Label without image, skipping: {stem}")
 
     return common_stems, image_files, label_files
+
+
+def remove_big_containers(boxes, scores, area_ratio_thresh=1.5):
+    keep = []
+    
+    for i, boxA in enumerate(boxes):
+        x1A, y1A, x2A, y2A = boxA
+        areaA = (x2A - x1A) * (y2A - y1A)
+        
+        remove = False
+        
+        for j, boxB in enumerate(boxes):
+            if i == j:
+                continue
+                
+            x1B, y1B, x2B, y2B = boxB
+            areaB = (x2B - x1B) * (y2B - y1B)
+            
+            tol = 10  # pixels
+            
+            # Check if B is inside A
+            inside = (
+                x1B >= x1A-tol and y1B >= y1A-tol and
+                x2B <= x2A+tol and y2B <= y2A+tol
+            )
+            
+            # Only remove if A is significantly bigger
+            if inside and areaA > areaB * area_ratio_thresh:
+                remove = True
+                break
+        
+        if not remove:
+            keep.append(i)
+    
+    return keep

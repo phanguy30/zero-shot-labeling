@@ -44,6 +44,7 @@ MULTIMASK_OUTPUT = False
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 (OUTPUT_DIR / "viz").mkdir(exist_ok=True)
 (OUTPUT_DIR/ "labels").mkdir(exist_ok=True)
+(OUTPUT_DIR / "viz_with_gt").mkdir(exist_ok=True)
 
 
 # =========================
@@ -95,38 +96,6 @@ def run_grounding_dino(image_path: Path):
 
     return image_source, input_boxes, conf_np, labels
 
-
-def remove_big_containers(boxes, scores, area_ratio_thresh=1.5):
-    keep = []
-    
-    for i, boxA in enumerate(boxes):
-        x1A, y1A, x2A, y2A = boxA
-        areaA = (x2A - x1A) * (y2A - y1A)
-        
-        remove = False
-        
-        for j, boxB in enumerate(boxes):
-            if i == j:
-                continue
-                
-            x1B, y1B, x2B, y2B = boxB
-            areaB = (x2B - x1B) * (y2B - y1B)
-            
-            # Check if B is inside A
-            inside = (
-                x1B >= x1A and y1B >= y1A and
-                x2B <= x2A and y2B <= y2A
-            )
-            
-            # Only remove if A is significantly bigger
-            if inside and areaA > areaB * area_ratio_thresh:
-                remove = True
-                break
-        
-        if not remove:
-            keep.append(i)
-    
-    return keep
 
 def remove_big_containers(boxes, scores, area_ratio_thresh=1.5):
     keep = []
