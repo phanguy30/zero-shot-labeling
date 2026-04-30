@@ -31,7 +31,7 @@ Comparison between:
 The original dataset does not exhaustively label all cherry instances. As a result, the auto-labeling model may correctly identify cherries that are missing from the ground truth but are counted as false positives during evaluation. This makes the model appear less precise than it actually is. In reality, the true precision of the auto-labeling approach is likely higher than reported.
 
 
-### Auto vs Manual Comparison
+### Auto vs Manual Labeling Comparison
 
 <table width="100%">
   <tr>
