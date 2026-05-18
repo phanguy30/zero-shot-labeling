@@ -9,6 +9,7 @@ git submodule update --init --recursive
 
 # Install dependencies
 To install Grounded SAM check: https://github.com/IDEA-Research/Grounded-SAM-2?tab=readme-ov-file 
+pip install -r requirements.txt
 
 # Results
 
