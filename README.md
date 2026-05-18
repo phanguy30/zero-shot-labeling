@@ -155,11 +155,6 @@ This project runs a single iteration of the self-training loop:
 4. Retrain YOLO on the merged labels (final model)
 
 
-## TODO
-
-- [ ] Add a Jupyter notebook demonstrating the full auto-labeling workflow end-to-end
-- [x] Include example images and intermediate outputs (Grounding DINO → YOLO → merged labels)
-
 ## Example Workflow
 
 Run the end-to-end example from [examples/cherry_bootstrap_workflow](examples/cherry_bootstrap_workflow).
