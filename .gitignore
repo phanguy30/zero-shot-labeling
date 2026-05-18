@@ -1,10 +1,12 @@
 # datasets
 dataset/
+__pycache__/
 
 # model weights
 *.pt
 
 # training outputs
+_pycache_/
 runs/
 Eval/ground_dino_out
 

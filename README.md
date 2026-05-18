@@ -157,7 +157,11 @@ This project uses a fully automated labeling pipeline via automatic merging, fol
 ## TODO
 
 - [ ] Add a Jupyter notebook demonstrating the full auto-labeling workflow end-to-end
-- [ ] Include example images and intermediate outputs (Grounding DINO → YOLO → merged labels
+- [x] Include example images and intermediate outputs (Grounding DINO → YOLO → merged labels)
+
+## Example Workflow
+
+Run the end-to-end example from [examples/cherry_bootstrap_workflow](examples/cherry_bootstrap_workflow).
 
 ## Credit
 
