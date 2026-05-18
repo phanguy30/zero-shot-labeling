@@ -1,0 +1,20 @@
+# Project runtime dependencies (excluding submodule internals)
+torch
+torchvision
+transformers<5
+ultralytics
+addict
+yapf
+timm
+numpy
+opencv-python
+supervision>=0.22.0
+pycocotools
+pandas
+Pillow
+matplotlib
+scikit-learn
+safetensors
+
+# Note: Grounded-SAM-2 provides its own requirements and is a submodule.
+# Install the submodule extras by following Grounded-SAM-2/README.md if needed.
